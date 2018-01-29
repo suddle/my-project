@@ -2,9 +2,6 @@
 <div>
 	{{msg}}
 </div>
-<div>
-    {{data}}
-</div>
 </template>
 <script>
 export default {
@@ -12,7 +9,6 @@ export default {
   data () {
     return {
       msg: 'zjy'，
-      data:'123'
     }
   }
 }
