@@ -1,6 +1,33 @@
-/* 
-* @Author: Marte
-* @Date:   2018-03-28 17:25:32
-* @Last Modified by:   Marte
-* @Last Modified time: 2018-03-28 17:26:15
-*/
+.shop_head_nav{
+    height: 50px;
+    line-height: 50px;
+    background:#333;
+    padding:0 10px;
+}
+.login{
+    color: #fff;
+}
+.register{
+    color: #fff;
+}
+.shop_head_nav ul li{
+    margin: 0 10px;
+    cursor: pointer;
+}
+.shop_head_search{
+    min-height: 50px;
+}
+.shop_head_search .logo{
+    width: 100px;
+    height:100px;
+    background-size: 100% 100%;
+    border-radius: 10px;
+}
+.search_input{
+    width:200px;
+    height:40px;
+    line-height: 40px;
+    padding-left: 10px;
+    color:#ddd;
+    font-size: 14px;
+}
