@@ -18,6 +18,7 @@
     min-height: 50px;
     margin:10px 0px;
     padding:10px;
+    /*background:#EAF0E8;*/
 }
 .shop_head_search .logo_img{
     width: 70px;
@@ -83,8 +84,8 @@
     padding:0px 10px;
 }
 .goods_list{
-    width:290px;
-    height:136px; 
+    width:259px;
+    height:194px; 
     position:relative;
     
 }
@@ -116,12 +117,15 @@
     font-size: 20px;
 }
 .shops{
+    min-height: 460px;
     margin-top: 20px;
     padding-bottom: 20px;
+    /*background:#EAF0E8;*/
+    margin-bottom: 20px;
 }
 .shop_show_big{
     height:300px;
-    width:100px;
+    width:200px;
     vertical-align: top;
     text-align: center;
 }
@@ -136,4 +140,46 @@
 .goods_show_big img{
     vertical-align: bottom;
     width:100%;
+}
+.models{
+    padding:0px 10px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.shop_list{
+    display:flex;
+    justify-content: space-between;
+}
+.shop_list_model{
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:5px;
+}
+.list_model_head{
+    position:relative;
+}
+.list_model_head p{
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    background: rgba(0,0,0,.5);
+    color:#fff;
+    font-size: 14px;
+    text-align: center;
+}
+.list_model_foot{
+
+}
+.shop_txt{
+    font-size: 18px;
+    color:#333;
+}
+.shop_price strong{
+  font-size: 20px;
+}
+.footer{
+    background:#333;
+    width:100%;
+    min-height: 200px;
+    color:#fff;
 }
