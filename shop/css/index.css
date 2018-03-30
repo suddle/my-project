@@ -16,18 +16,124 @@
 }
 .shop_head_search{
     min-height: 50px;
+    margin:10px 0px;
+    padding:10px;
 }
-.shop_head_search .logo{
-    width: 100px;
-    height:100px;
+.shop_head_search .logo_img{
+    width: 70px;
+    height:70px;
+     background:url(../images/logo.png) no-repeat;
     background-size: 100% 100%;
     border-radius: 10px;
 }
-.search_input{
-    width:200px;
+.search{
+    position: relative;
+    margin: 0 auto;
+    vertical-align: top;
+    margin-top: 16px;
+    overflow: hidden;
+   border-radius: 5px;
+}
+.goods_shop{
+    position:absolute;
+    left:0px;
+    background:#83CDFF;
+    border-top-left-radius: 5px;
+    cursor:pointer;
+}
+.shopcar{
+    width:60px;
+    height:60px;
+    background:url(../images/shopcar.png) no-repeat;
+    background-size: 100% 100%;
+}
+.goods_shop em,.goods_shop span{
+    width:40px;
+    text-align: center;
     height:40px;
     line-height: 40px;
-    padding-left: 10px;
+    display: block;
+    border-radius: 5px;
+    color:#fff;
+}
+.search_input{
+    width:400px;
+    height:40px;
+    line-height: 40px;
+    padding-left: 40px;
     color:#ddd;
     font-size: 14px;
+    border:1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.search_btn{
+    padding:10px;
+    border-radius: 5px;
+    color:#fff;
+     width:30px;
+     height:30px;
+     text-align: center;
+     line-height: 30px;
+     background:#FF0000;
+}
+.shop_show_list{
+    /*display:flex;
+    justify-content: space-between;*/
+    padding:0px 10px;
+}
+.goods_list{
+    width:290px;
+    height:136px; 
+    position:relative;
+    
+}
+.goods_list img{
+    width:98%;
+    height:100%;
+    display:block;
+    border-radius: 5px;
+    margin:0 auto;
+}
+.goods_list:hover .top_cover{
+  display:block;
+}
+.top_cover{
+    display:none;
+    position:absolute;
+    z-index: 10;
+    top: 0;
+    background:rgba(0,0,0,.2);
+    width:100%;
+    height:100%;
+}
+.shop_title{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+}
+.shop_title h3{
+    font-size: 20px;
+}
+.shops{
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+.shop_show_big{
+    height:300px;
+    width:100px;
+    vertical-align: top;
+    text-align: center;
+}
+.goods_show_big h4{
+    font-size: 20px;
+    text-align: center;
+}
+.goods_show_big span{
+    font-size: 16px;
+    text-align: center;
+}
+.goods_show_big img{
+    vertical-align: bottom;
+    width:100%;
 }
