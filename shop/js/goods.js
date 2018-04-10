@@ -1513,3 +1513,581 @@ define([
     }
     return exports;
 })
+
+
+ $(function(){
+
+
+
+    //            星星打分
+    $.fn.raty.defaults.path = star_img;
+    $('#function-demo').raty({
+        number: 5, //多少个星星设置
+        targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
+        path: star_img,
+        hints: ['差', '一般', '好', '非常好', '全五星'],
+        size: 200,
+        readOnly:true,
+        starHalf: 'ban_star.png',
+        starOff: 'star_dark.png',
+        starOn: 'start_light.png',
+        target: '#function-hint',
+        score:function(){
+        return star_count
+    }
+    });
+    // 售价初始化
+    var price = parseFloat($('#goodsprice').text());
+    $('#goodsprice').text(price.toFixed(2));
+    var postdata = {
+        'goods_id':goods_id,
+        'color_id': '',
+        'norms_id':'',
+        'goods_num':1,
+        'uid':uid
+    };
+    //        商品预售
+    var timer = setInterval(function(){
+        currtime--;
+        if(currtime<=0){
+            $('#end_yushou').html("商品预售已结束。");
+            clearInterval(timer);
+        }else {
+            var timestring = timeStamp(currtime);
+            $('#timestring').html(timestring);
+        }
+    },1000);
+
+    $('#swiper-smallimg').click(function () {
+        $(".color_bigPic").hide();
+    });
+    //选择颜色和规格
+    var selectCN = function(){
+        if($(this).attr('class').indexOf('selectColor')>=0){
+            postdata['color_id'] = $(this).attr('data-id');
+            $(".color_bigPic").css("background-image", "url("+$(this)[0].src+")");
+
+        }
+        if($(this).attr('class').indexOf('selectNorm')>=0){
+            postdata['norms_id'] = $(this).attr('data-id');
+        };
+
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            $('.storagenum').text(num_all);
+            if($(this).attr('class').indexOf('selectColor')>=0){
+                postdata['color_id'] ='';
+                $(".color_bigPic").hide();
+            }
+            if($(this).attr('class').indexOf('selectNorm')>=0){
+                postdata['norms_id'] ='';
+            }
+        }else{
+            $(".color_bigPic").show();
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+            if( postdata['color_id'] &&  postdata['norms_id']){
+                getpriceajax();
+            }
+        }
+    }
+    var getpriceajax = function (){
+        $.post(getpriceurl,{
+            color_id:postdata['color_id'],
+            norms_id:postdata['norms_id'],
+            goods_id:postdata['goods_id']
+        },function(data){
+            var price = data['price'];
+            var stock = data['stock'];
+            $('#goodsprice').text(price.toFixed(2));
+            $('.operation .storagenum').text(stock);
+            $('.operation .goods_st_h').val(stock);
+            if(stock<=0){
+                $('.nnum').val('0');
+                $('.storagenum').text('0');
+                $('.cut').addClass('not_allowed');
+                $('.nnum').addClass('not_allowed');
+                $('.add').addClass('not_allowed');
+            }else{
+                $('.nnum').val('1');
+                $('.cut').removeClass('not_allowed');
+                $('.nnum').removeClass('not_allowed');
+                $('.add').removeClass('not_allowed');
+            }
+            $('.storagenum').text(parseInt($('.operation .goods_st_h').val())-parseInt($('.operation .nnum').val()));
+        })
+    };
+    $('.selectColor').click(selectCN);
+    $('.selectNorm').click(selectCN);
+    $('.storagenum').text(parseInt($('.operation .goods_st_h').val())-parseInt($('.operation .nnum').val()));
+    //添加减少购买数量
+    var oAddCut = function(){
+        var currnum = parseInt($('.operation .nnum').val());
+        var storagenum = parseInt($('.operation .storagenum').text());
+        var storagenum_b = parseInt($('.operation .goods_st_h').val());
+        if($(this).attr('class').indexOf('add')>=0 && storagenum>0){
+            if(currnum>storagenum_b){
+                currnum = storagenum_b-currnum
+            }else{
+                currnum++;
+                storagenum=storagenum_b-currnum;
+            }
+        }
+        if($(this).attr('class').indexOf('cut')>=0 && storagenum>=0){
+            if(currnum<=1){
+                currnum=1;
+            }else{
+                currnum--;
+                storagenum=storagenum_b-currnum;
+            }
+        }
+
+        $('.operation .storagenum').text(storagenum);
+        postdata['goods_num']=currnum;
+        $('.operation .nnum').val(currnum)
+    };
+    // 数量输入框输入
+    function numCHange(){
+        var currnum = parseInt($('.operation .nnum').val());
+        var storagenum = parseInt($('.operation .storagenum').text());
+        var storagenum_b = parseInt($('.operation .goods_st_h').val());
+        if($('.operation .nnum').val()==''){
+            currnum = 1;
+        }
+        if(currnum == storagenum_b){
+
+            currnum = storagenum_b;
+        }
+        if(currnum>storagenum_b){
+
+            currnum = storagenum;
+            storagenum=storagenum_b-currnum;
+        }
+
+        if(currnum<=1){
+            currnum = 1;
+            storagenum=storagenum_b-currnum;
+        }
+
+        storagenum=storagenum_b-currnum;
+
+        $('.operation .storagenum').text(storagenum);
+        postdata['goods_num']=currnum;
+        $('.operation .nnum').val(currnum)
+    }
+    //点击减少增加数量 输入框输入数量
+    $('.operation .add').click(oAddCut);
+    $('.operation .cut').click(oAddCut);
+    $('.operation .nnum').change(numCHange);
+    //立即预定按钮
+    $(document).click(function(){
+        $('.ydbtn .message').hide();
+    })
+    // 点击抢购方法
+    var reserveSubmit = function(e){
+        e.stopPropagation();
+        if(currtime <0){
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr em').text('商品预售已结束')
+            return false;
+        }
+        var currnum = parseInt($('.operation .nnum').val());
+        var storagenum =parseInt($('.operation .goods_st_h').val());
+
+        if(!postdata['color_id']){
+    //                $('.ydbtn .message').show();
+    //                $('.ydbtn .tmessage').text('请选择款式');
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr').text('请选择颜色')
+            return false;
+        }
+        if(!postdata['norms_id']){
+    //                $('.ydbtn .message').show();
+    //                $('.ydbtn .tmessage').text('请选择尺码');
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr').text('请选择规格')
+            return false ;
+        }
+        if(currnum-storagenum>0){
+    //                $('.ydbtn .message').show();
+    //                $('.ydbtn .tmessage').text('商品数量超过库存');
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr').text('商品数量超过库存');
+            $('.goods_mask_tsmr').css('background-position','108px center');
+            $('.goods_mask_tsmr').css('text-indent','36px');
+            return false;
+        }
+        $("input[name='goods_id']").val(postdata['goods_id']);
+        $("input[name='color_id']").val(postdata['color_id']);
+        $("input[name='norms_id']").val(postdata['norms_id']);
+        $("input[name='goods_num']").val(postdata['goods_num']);
+
+
+    };
+    //点击抢购
+    $('.btn1').click(reserveSubmit)
+    // 点击购买方法
+    var offset=$('.rightFloat_shoppingCart').offset();
+    var ds = function(e){
+        var num =1;
+        var addcar=$(this);
+        e.stopPropagation();
+        if(currtime <0){
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr em').text('商品预售已结束')
+            return false;
+        }
+        if(postdata['uid']<1){
+            window.location.href=login_url;
+            return false;
+        }
+        if(!postdata['color_id']){
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr').text('请选择颜色')
+            return false;
+        }
+        if(!postdata['norms_id']){
+            $('.goods_mask').show();
+            $('.goods_mask_ts').show();
+            $('.goods_mask_tsmr').text('请选择规格')
+            return false ;
+        }
+        var color_id_c= $('.cimgs').find('.active').attr('data-id');
+        var norms_id_c = $('.sml').find('.active').attr('data-id');
+        var goods_num_c = $('.nnum').val();
+        var goods_id_c = postdata['goods_id'];
+        $.ajax({
+            url:shop_cart_url,
+            type:'post',
+            data:{"color_id":color_id_c,"norms_id":norms_id_c,"goods_num":goods_num_c,"goods_id":goods_id_c},
+            success:function(data){
+            if(data.code==200){
+                $('.goods_mask').show();
+                $('.goods_mask_ts').show();
+                $('.goods_mask_tsmr').text('加入购物车成功！');
+                $('.shoppingCart_count').text(data.carnum);
+            }
+        }
+    })
+    }
+    //        点击购买
+    $('.btn2').click(ds)
+
+
+    //时间戳 转 月日时分秒
+    function timeStamp( second_time ){
+        var time = parseInt(second_time) + "秒";
+        if( parseInt(second_time )> 60){
+
+            var second = parseInt(second_time) % 60;
+            var min = parseInt(second_time / 60);
+            time = min + "分" + second + "秒";
+
+            if( min > 60 ){
+                min = parseInt(second_time / 60) % 60;
+                var hour = parseInt( parseInt(second_time / 60) /60 );
+                time = hour + "小时" + min + "分" + second + "秒";
+
+                if( hour > 24 ){
+                    hour = parseInt( parseInt(second_time / 60) /60 ) % 24;
+                    var day = parseInt( parseInt( parseInt(second_time / 60) /60 ) / 24 );
+                    time = day + "天 " + hour + "小时 " + min + "分 " + second + "秒";
+                }
+            }
+        }
+        return time;
+    }
+    //        鼠标移上预售事件
+    $('.rule').hover(function(){
+        $('.book_rule').toggle();
+    })
+
+    var foot_height;
+    setTimeout(function(){
+        foot_height = document.body.scrollHeight;
+    },500)
+
+    //scroll 事件
+    $(window).scroll(function() {
+
+        var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+        if(scrolltop>=(document.body.scrollHeight-800)){
+            $(".d_leftBox").css('bottom','250px')
+
+        }else{
+            $(".d_leftBox").css('bottom','50px')
+        }
+        if(scrolltop>792){
+            $('.x_buy_fix').addClass('tops')
+        }else{
+            $('.x_buy_fix').removeClass('tops')
+        }
+        if(scrolltop>foot_height-1000){
+            $('.shop2_rightFloat').hide();
+        }else{
+            $('.shop2_rightFloat').show();
+        }
+    });
+
+    //弹层js
+    $('.goods_mask_tstr').click(function(){
+        $('.goods_mask').hide();
+        $('.goods_mask_ts').hide();
+    });
+    $('.goods_mask_tsbb').click(function(){
+        $('.goods_mask').hide();
+        $('.goods_mask_ts').hide();
+    });
+    $('.x_buy_fixl span').on('click',function(){
+        $(this).addClass('detaikl_color').siblings().removeClass('detaikl_color')
+    })
+
+    // 点击商品详情  评价晒单
+    var sd_height = 0;
+    var xq_height = 0;
+    setTimeout(function(){
+        sd_height = $('#comment_header').offset().top-200;
+    },500)
+    xq_height = $('.viewDetails_botlb').offset().top-200;
+    $('.appris_dan').on('click',function(){
+        $('body,html').animate({scrollTop:sd_height},500);
+    })
+
+    // 鼠标移上侧边二维码
+    $('.shop_detail').on('click',function(){
+        $('body,html').animate({scrollTop:xq_height},500);
+    })
+    $('.rightFloat_phone').hover(function(){
+        $(this).find('.ewm').show();
+    },function(){
+        $(this).find('.ewm').hide();
+    });
+
+    $(document).on('click','.rightFloat_toTop',function(){
+        $('body,html').animate({scrollTop:0},500);
+    })
+    $('.ps-current ul li').on('click',function(){
+        $(this).closest('.ps-current').hide();
+    })
+    $('.ps-prev,.ps-next').on('click',function(e){
+        window.event? window.event.returnValue = false : e.preventDefault();
+    })
+    $('.ps-list').on('click',function(){
+        $('.ps-current').show();
+    })
+    //      分页
+    $(".page").Page({
+        totalPages:all_page,
+        liNums: 5,
+        activeClass: 'activP',
+        firstPage: '首页',
+        lastPage: '末页',
+        prv: '上一页',
+        next: '下一页',
+        callBack : function(page){
+
+        $.ajax({
+            url:page_url,
+            type:'post',
+            data:{"id":goods_id,"page":page},
+            success:function(data){
+            if(data.code==200){
+                $(".comment_ul").html("");
+                var count = data.list;
+                $("#pictureBox").html(html);
+                $('.pgwSlideshow').pgwSlideshow();
+
+                for(var j=0;j<count.length;j++){
+                    var html = '<div class="comment_li clearfix">' +
+                        '<div class="comment_li_avatar">' +
+                        '<a href="" style="background-image: url(' + count[j].avatar + ');"></a>' +
+                        '<div>' + count[j].username + '</div>' +
+                        '</div>' +
+                        '<div>' +
+                        '<div class="comment_li_content clearfix">' +
+                        '<div class="li_content_stars clearfix">' +
+                        star_loop(count[j].mark)+
+                        '</div>' +
+                        '<div class="li_content_comment">' + count[j].content + '</div>' +
+                        lunbos(count[j].img)+
+                        '<div class="li_content_date">' + count[j].created_at +
+                        '</div>' +
+                        '</div>';
+                    if (count[j].channel == 3) {
+                        html = '<div class="comment_li clearfix">' +
+                            '<div class="comment_li_avatar">' +
+                            '<a href="" style="background-image: url(' + count[j].avatar + ');"></a>' +
+                            '<div>' + count[j].username + '</div>' +
+                            '</div>' +
+                            '<div>' +
+                            '<div class="comment_li_content clearfix">' +
+                            '<div class="li_content_stars clearfix">' +
+                            star_loop(count[j].mark)+
+                            '</div>' +
+                            '<div class="li_content_comment">' + count[j].content + '</div>' +
+                            lunbos(count[j].img)+
+                            '<div class="li_content_date">' + count[j].created_at + '<span>来自<a href="" target="_blank">游侠客APP</a></span></div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    if (count[j].reply.content !== undefined) {
+                        html = '<div class="comment_li clearfix">' +
+                            '<div class="comment_li_avatar">' +
+                            '<a href="" style="background-image: url(' + count[j].avatar + ');"></a>' +
+                            '<div>' + count[j].username + '</div>' +
+                            '</div>' +
+                            '<div>' +
+                            '<div class="comment_li_content clearfix">' +
+                            '<div class="li_content_stars clearfix">' +
+                            star_loop(count[j].mark)+
+                            '</div>' +
+                            '<div class="li_content_comment">' + count[j].content + '</div>' +
+                            lunbos(count[j].img)+
+                            '<div class="li_content_date">'+count[j].created_at+
+                            '<div class="pingjia">' +
+                            '<p>' + '<em class="">游小侠 回复：</em>' + count[j].reply.content + '</p>' +
+                            '<p>' + count[j].reply.created_at + '</p>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    if(count[j].channel == 3 && count[j].reply.content !== undefined){
+                        html = '<div class="comment_li clearfix">' +
+                            '<div class="comment_li_avatar">' +
+                            '<a href="" style="background-image: url('+count[j].avatar+');"></a>' +
+                            '<div>'+count[j].username+'</div>'+
+                            '</div>'+
+                            '<div>' +
+                            '<div class="comment_li_content clearfix">'+
+                            '<div class="li_content_stars clearfix">'+
+                            star_loop(count[j].mark)+
+                            '</div>'+
+                            '<div class="li_content_comment">'+count[j].content+'</div>'+
+                            lunbos(count[j].img)+
+                            '<div class="li_content_date">'+count[j].created_at+'<span>来自<a href="" target="_blank">游侠客APP</a></span></div>'+
+                            '<div class="pingjia">'+
+                            '<p>'+'<em class="">游小侠 回复：</em>'+count[j].reply.content+'</p>'+
+                            '<p>'+count[j].reply.created_at+'</p>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>';
+                    }
+                    $(".comment_ul").append(html);
+                }
+            }
+        }
+    })
+    }
+    });
+
+    // 名字加星显示
+    nameStar();
+    function nameStar(){
+        $('.yxk_user').each(function(index,item){
+            var name = $(item).text().replace(/(.{1}).*(.{1})/,"$1**$2");
+            $(item).text(name)
+        })
+    }
+
+    // 换行
+    hunahang($('.li_content_comment'));
+    hunahang($('.hunahang'));
+    function hunahang(val){
+        var text = val;
+        text.each(function(index,item){
+            if($(item).text().indexOf("<br/>")){
+                $(item).html($(item).text().replace(/\n|\r|(\r\n)|(\u0085)|(\u2028)|(\u2029)/g, '<br/>'));
+            }
+        })
+
+    }
+
+
+    //循环星星
+    function star_loop(num) {
+        var html_star = "";
+        for(var j=0;j<num;j++){
+            html_star += '<div class="star"></div>';
+        }
+        for(var j=0;j<(5-num);j++){
+            html_star += '<div class="stardark"></div>';
+        }
+        return html_star;
+    }
+    // 轮播
+    function lunbos(imgs){
+        var lunbohtml = '';
+        if(!imgs){
+            return lunbohtml;
+        }
+        lunbohtml = '<div class="lunbo">'+
+            '<ul class="zy_uls clearfix">'+
+            loop_img(imgs)+
+            '</ul>'+
+            '<div class="cy_banner">'+
+            '<ul class="cy_lus clearfix">'+
+            '<div class="cy_imgs">'+
+            loop_img(imgs)+
+            '</div>'+
+            '</ul>'+
+            '<strong class="bt1"></strong>'+
+            ' <strong class="bt2"></strong>'+
+            ' </div>'+
+            ' </div>';
+        return lunbohtml;
+    }
+    //   轮播
+    function loop_img(num) {
+        var html_star = "";
+        for(var m=0;m<num.length;m++){
+            html_star += '<li><img src="'+num[m]+'"></li>';
+        }
+        return html_star;
+    }
+    //点击放大轮播
+    var lbindex = 0;
+    var lengths  ;
+    $(document).on('click','.zy_uls li',function(){
+        var count = $(this).index();
+        lbindex = $(this).index();
+        $(this).closest('.lunbo').find('.cy_banner').show();
+        $(this).addClass('on').siblings().removeClass('on');
+        $(this).closest('.lunbo').find('.cy_lus li').eq(count).addClass('block').siblings().removeClass('block');
+    })
+
+    $(document).on('click','.bt2',function(){
+        lbindex++;
+        lengths  = $(this).closest('.lunbo').find('.zy_uls li').length;
+        if(lbindex>lengths-1){
+            lbindex=0;
+        }
+        $(this).closest('.lunbo').find('.zy_uls li').eq(lbindex).addClass('on').siblings().removeClass('on');
+        $(this).closest('.lunbo').find('.cy_lus li').eq(lbindex).addClass('block').siblings().removeClass('block')
+    })
+
+    $(document).on('click','.bt1',function(){
+        lbindex--;
+        lengths  = $(this).closest('.lunbo').find('.zy_uls li').length;
+        if(lbindex<0){
+            lbindex=lengths;
+        }
+        $(this).closest('.lunbo').find('.zy_uls li').eq(lbindex).addClass('on').siblings().removeClass('on');
+        $(this).closest('.lunbo').find('.cy_lus li').eq(lbindex).addClass('block').siblings().removeClass('block');
+    })
+    $(document).on('click','.cy_imgs',function(){
+        $(this).closest('.lunbo').find('.cy_banner').hide();
+    })
+    //    分享
+    $('#share').on('mouseenter',function(){
+        $('.video_shareBox').show();
+    })
+    $('#share').on('mouseleave',function(){
+        $('.video_shareBox').hide();
+    })
+})

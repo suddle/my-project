@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/basic.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/shopcar.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="shop_head_nav">
+            <div class="wrap_1200">
+                <ul>
+                    <li class="login fl">登录</li>
+                    <li class="register fl">注册</li>
+                    <li class="fr"><a href="">帮助</a></li>
+                    <li class="fr"><a href="">商品展示</a></li>
+                    <li class="fr"><a href="">购物车</a></li>
+                    <li class="fr"><a href="">个人中心</a></li>
+                    <li class="fr"><a href="">首页</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrap_1200">
+            <div class="shopcar_txt">
+                <img src="https://www.chuanshangjia.com/img/platform/mock/%E5%BA%97%E9%93%BA%E9%A6%96%E9%A1%B5new.png" alt="" />
+            </div>
+            <div class="shop_nav_list">
+                <ul>
+                    <li>首页</li>
+                    <li>购物车</li>
+                    <li>个人中心</li>
+                    <li>手机版</li>
+                </ul>
+            </div>
+            <div class="shop_car clearfix">
+                <div class="fl fd">
+                    <div class="fd_d">
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/ca332da234f22933efb39a6d86ec3827.jpg" alt="" />
+                    </div>
+                    <div class="fd_s">
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/ca332da234f22933efb39a6d86ec3827.jpg" alt="" />
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/2199fe646e63e48bf869a0db39107698.jpg" alt="" />
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/15c2c7b704be81ef8a20be151fe860b4.jpg" alt="" />
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/81f389d367976a64b92c9748e8c09167.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="fl buy">
+                    <strong>中老年女装夏装新款雪纺真丝短袖上衣宽松妈妈装T恤 厂家批发</strong>
+                    <div class="shopcar_price">
+                        <p><span>售价</span><em>￥12</em></p>
+                        <p><span>批发价</span><em>￥55</em></p>
+                    </div>
+                </div>
+                <div class="fl kuai">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.fd_s img').on('mouseenter',function(){
+            var img = $(this).attr('src');
+            $('.fd_d img').attr('src',img)
+        })
+    })
+</script>
+</html>
