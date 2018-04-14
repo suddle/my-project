@@ -49,12 +49,37 @@
                 <div class="fl buy">
                     <strong>中老年女装夏装新款雪纺真丝短袖上衣宽松妈妈装T恤 厂家批发</strong>
                     <div class="shopcar_price">
-                        <p><span>售价</span><em>￥12</em></p>
-                        <p><span>批发价</span><em>￥55</em></p>
+                        <p><span>售价:</span><em>￥12</em></p>
+                        <p><span>批发价:</span><em>￥55</em></p>
+                    </div>
+                    <p class="goods_price"><span>数量:</span><em class="reduce">-</em><input type="text" class="shop_count" placeholder="0" value="10"/><em class="add">+</em></p>
+                    <div class="now_buy">
+                        <a href=""><span class="fen">立即购买</span></a>
+                        <a href=""><span>加入购物车</span></a>
+                    </div>
+                    <div class="dingzhi">
+                        <p><span>是否定制</span>否</p>
+                    </div>
+                    <div>
+                        <p><span>服务承诺</span></p>
                     </div>
                 </div>
                 <div class="fl kuai">
-                    
+                    <div class="kuai_head">
+                        看了又看
+                    </div>
+                    <div class="kuai_content">
+                        <p>￥78</p>
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/a8a5c1d2e99c37f6f89c42c2f90c06fe.JPG" alt="" />
+                    </div>
+                    <div class="kuai_content">
+                        <p>￥78</p>
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/a8a5c1d2e99c37f6f89c42c2f90c06fe.JPG" alt="" />
+                    </div>
+                    <div class="kuai_content">
+                        <p>￥78</p>
+                        <img src="http://static.chuanshangjia.com/mallpic/productpic/a8a5c1d2e99c37f6f89c42c2f90c06fe.JPG" alt="" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,9 +88,27 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(function(){
+        var goods_count=20;   //库存
         $('.fd_s img').on('mouseenter',function(){
             var img = $(this).attr('src');
             $('.fd_d img').attr('src',img)
+        })
+
+        $('.reduce').on('click',function(){
+            var price = $('.shop_count').val();
+            price--;
+            if(price<=0){
+                price=0;
+            }
+            $('.shop_count').val(price)
+        })
+        $('.add').on('click',function(){
+            var price = $('.shop_count').val();
+            price++;
+            if(price>=goods_count){
+                price = goods_count
+            }
+            $('.shop_count').val(price)
         })
     })
 </script>

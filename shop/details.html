@@ -35,6 +35,36 @@
             </div>
         </div>
         <div class="wrap_1200">
+          <div class="lunbo">
+              <div class="lunbo_img">
+                   <ul>
+                     <li class="fl">
+                       <img src="http://gallery.youxiake.com/Public/Data/upload/201804/12/20921523500728.png?imageMogr2/quality/85" alt="" />
+                     </li>
+                     <li class="fl">
+                       <img src="http://gallery.youxiake.com/Public/Data/upload/201804/04/36241522825817.jpg?imageMogr2/quality/85" alt="" />
+                     </li>
+                     <li class="fl">
+                       <img src="http://gallery.youxiake.com/Public/Data/upload/201804/10/13241523344262.jpg?imageMogr2/quality/85" alt="" />
+                     </li>
+                     <li class="fl">
+                       <img src="http://gallery.youxiake.com/Public/Data/upload/201804/10/95411523343244.jpg?imageMogr2/quality/85" alt="" />
+                     </li>
+                   </ul>
+                   <dl class="lunbo_dian">
+                     <dt class="fl yl"></dt>
+                     <dt class="fl"></dt>
+                     <dt class="fl"></dt>
+                     <dt class="fl"></dt>
+                   </dl>
+                   <div class="lunbo_btn">
+                     <span class="lunbo_left"> << </span>
+                     <span class="lunbo_right"> >> </span>
+                   </div>
+              </div>
+          </div>
+        </div>
+        <div class="wrap_1200">
             <div class="detail_shop_nav">
               <div class="detail_nav_list">
                   <ul class="detil_list">
@@ -230,6 +260,7 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 $(function(){
+  var timer;
    $('.detail_img img').on('click',function(){
        var img = $(this).attr('src');
       $(this).closest('.detail_model').find('.detail_model_head img').attr('src',img)
@@ -243,6 +274,62 @@ $(function(){
       $(this).text(dp);
       $('.goods_shop span').text(txt)
    })
+
+   $('.detail_img img').on('mouseenter',function(){
+       var src = $(this).attr('src')
+       $(this).closest('.detail_model').find('.detail_model_head img').attr('src',src)
+   })
+   var indexs = 0;
+   var lengths = $('.lunbo_img ul li').length;
+   $('.lunbo_dian dt').on('click',function(){
+      indexs = $(this).index();
+      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $(this).addClass('yl').siblings().removeClass('yl')
+   })
+
+    timer = setInterval(function(){
+      indexs++;
+      if(indexs>=lengths){
+        indexs =0
+      }
+      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+   },1000)
+
+   $('.lunbo_left').on('click',function(){
+      indexs--;
+      if(indexs<0){
+          indexs=lengths;
+      }
+      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+   })
+   $('.lunbo_right').on('click',function(){
+      indexs++;
+      if(indexs>=lengths){
+        indexs =0
+      }
+      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+   })
+   $('.lunbo').on('mouseleave',function(){
+    $('.lunbo_left,.lunbo_right').hide()
+      timer = setInterval(function(){
+        indexs++;
+        if(indexs>=lengths){
+          indexs =0
+        }
+        $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+        $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+     },1000)
+      return false;
+   })
+   $('.lunbo').on('mouseenter',function(){
+       $('.lunbo_left,.lunbo_right').show()
+      clearInterval(timer)
+      return false;
+   })
+
 })
 </script>
 </html>
