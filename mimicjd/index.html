@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/basic.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="wrap" id="app">
+        <div class="jd_all_nav">
+            <div class="wrap_1200">
+                <ul class="jd_ul_nav">
+                    <li class="fr">手机京东</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">网站导航</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">客户服务</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">企业采购</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">京东会员</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">我的京东</li>
+                    <li class="nav_line"></li>
+                    <li class="fr">我的订单</li>
+                    <li class="nav_line"></li>
+                    <li class="fl location">
+                        <span><i></i>北京</span>
+                    </li>
+                    <p class="fr inline">你好,请登陆<em class="login">免费注册</em></p>    
+                </ul>
+            </div>
+        </div>
+        <div class="jd_search">
+             <div class="wrap_1200">
+                 <div class="jd_logo"></div>
+                 <div class="search_input_wrap">
+                     <div class="search_input inline">
+                         <input type="text" />
+                         <button>搜索</button>
+                     </div>
+                     <div class="my_shopcar inline">
+                         我的购物车
+                     </div>
+                     <div class="ewm">
+                         
+                     </div>
+                 </div>
+                 <div class="search_txt inline">
+                     <ul>
+                         <a href="#" class="jd_h">预约享优惠</a>
+                         <a href="#">芒果节</a>
+                         <a href="#">手机新品</a>
+                         <a href="#">沸腾五一</a>
+                         <a href="#">周末专享</a>
+                         <a href="#">满99减40</a>
+                         <a href="#">跨店4免1</a>
+                         <a href="#">农资畜牧</a>
+                     </ul>
+                 </div>
+                 <div class="search_navitems inline">
+                     <a href="">秒杀</a>
+                     <a href="">优惠券</a>
+                     <a href="">PLUS会员</a>
+                     <a href="">闪购</a>
+                     <a href="">拍卖</a>
+                     <a href="">京东服饰</a>
+                     <a href="">京东超市</a>
+                     <a href="">生鲜</a>
+                     <a href="">全球购</a>
+                     <a href="">京东金融</a>
+                     <p class="inline treasure"></p>
+                 </div>
+             </div>   
+        </div>
+        <div class="midum_nav">
+            <div class="wrap_1200">
+                <div class="midum_nav_one">
+                    <ul class="midum_ul" v-for="todo in todos">
+                        <li>
+                            <a href=""  v-for="td in todo.text"><em>{{td.name}}</em></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="midum_nav_two">
+                     <div class="lunbo">
+                          <div class="lunbo_img">
+                               <ul>
+                                 <li class="fl">
+                                   <img src="http://gallery.youxiake.com/Public/Data/upload/201804/12/20921523500728.png?imageMogr2/quality/85" alt="" />
+                                 </li>
+                                 <li class="fl">
+                                   <img src="http://gallery.youxiake.com/Public/Data/upload/201804/04/36241522825817.jpg?imageMogr2/quality/85" alt="" />
+                                 </li>
+                                 <li class="fl">
+                                   <img src="http://gallery.youxiake.com/Public/Data/upload/201804/10/13241523344262.jpg?imageMogr2/quality/85" alt="" />
+                                 </li>
+                                 <li class="fl">
+                                   <img src="http://gallery.youxiake.com/Public/Data/upload/201804/10/95411523343244.jpg?imageMogr2/quality/85" alt="" />
+                                 </li>
+                               </ul>
+                               <dl class="lunbo_dian">
+                                 <dt class="fl yl"></dt>
+                                 <dt class="fl"></dt>
+                                 <dt class="fl"></dt>
+                                 <dt class="fl"></dt>
+                               </dl>
+                               <div class="lunbo_btn">
+                                 <span class="lunbo_left"> << </span>
+                                 <span class="lunbo_right"> >> </span>
+                               </div>
+                          </div>
+                      </div>   
+                </div>
+                <div class="midum_nav_three">
+                    <ul>
+                        <li><img src="https://img20.360buyimg.com/babel/s190x150_jfs/t16990/134/1757398466/92327/645d928c/5ad70441N2588e3f9.png!q90!cc_190x150" alt="" /></li>
+                        <li><img src="https://img20.360buyimg.com/babel/s190x150_jfs/t18649/88/1549304015/38571/c40d35da/5acdbdc8N888aa8e3.jpg!q90!cc_190x150" alt="" /></li>
+                        <li><img src="https://img1.360buyimg.com/pop/s190x150_jfs/t17803/99/1822423045/28100/62b19656/5ad8609cNbb65c0e5.jpg!q90!cc_190x150" alt="" /></li>
+                    </ul>
+                </div>
+                <div class="midum_nav_four">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script>
+    $(function(){
+        var app = new Vue({
+          el: '#app',
+          data: {
+                todos: [
+                  { text: [{name:'家用电器'}] },
+                  { text: [{name:'数码'},{name:'手机'},{name:'运营商'}]},
+                  { text: [{name:'电脑'},{name:'办公'}]},
+                  { text: [{name:'家具'},{name:'家电'},{name:'家装'},{name:'厨具'}]},
+                  { text: [{name:'男装'},{name:'女皇'},{name:'童装'},{name:'内衣'}]},
+                  { text: [{name:'美妆个护'},{name:'宠物'}]},
+                  { text: [{name:'女鞋'},{name:'箱包'},{name:'中标'},{name:'珠宝'}]},
+                  { text: [{name:'男鞋'},{name:'运动'},{name:'户外'}]},
+                  { text: [{name:'房产'},{name:'汽车'},{name:'汽车用品'}]},
+                  { text: [{name:'母婴'},{name:'玩具乐器'}]},
+                  { text: [{name:'食品'},{name:'酒类'},{name:'生鲜'},{name:'特产'}]},
+                  { text: [{name:'艺术'},{name:'礼品鲜花'},{name:'农资'}]},
+                  { text: [{name:'医药'},{name:'情趣用品'}]},
+                  { text: [{name:'图书'},{name:'音像'},{name:'电子书'}]},
+                  { text: [{name:'机票'},{name:'酒店'},{name:'旅游'},{name:'生活'}]},
+                  { text: [{name:'理财'},{name:'众筹'},{name:'白条'},{name:'保险'}]}
+                ]
+          }
+        })
+
+           var indexs = 0;
+           var lengths = $('.lunbo_img ul li').length;
+           $('.lunbo_dian dt').on('click',function(){
+              indexs = $(this).index();
+              $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().hide();
+              $(this).addClass('yl').siblings().removeClass('yl')
+           })
+
+            timer = setInterval(function(){
+              indexs++;
+              if(indexs>=lengths){
+                indexs =0
+              }
+              $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+              $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+           },1000)
+
+           $('.lunbo_left').on('click',function(){
+              indexs--;
+              if(indexs<0){
+                  indexs=lengths;
+              }
+              $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().hide();
+              $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+           })
+           $('.lunbo_right').on('click',function(){
+              indexs++;
+              if(indexs>=lengths){
+                indexs =0
+              }
+              $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().hide();
+              $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+           })
+           $('.lunbo').on('mouseleave',function(){
+            $('.lunbo_left,.lunbo_right').hide()
+              timer = setInterval(function(){
+                indexs++;
+                if(indexs>=lengths){
+                  indexs =0
+                }
+                $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().hide();
+                $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
+             },3000)
+              return false;
+           })
+           $('.lunbo').on('mouseenter',function(){
+               $('.lunbo_left,.lunbo_right').fadeIn()
+              clearInterval(timer)
+              return false;
+           })
+    })
+
+</script>
+</html>
