@@ -283,7 +283,7 @@ $(function(){
    var lengths = $('.lunbo_img ul li').length;
    $('.lunbo_dian dt').on('click',function(){
       indexs = $(this).index();
-      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().fadeOut();
       $(this).addClass('yl').siblings().removeClass('yl')
    })
 
@@ -292,7 +292,7 @@ $(function(){
       if(indexs>=lengths){
         indexs =0
       }
-      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_img ul li').eq(indexs).show().siblings().fadeOut();
       $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
    },1000)
 
@@ -301,7 +301,7 @@ $(function(){
       if(indexs<0){
           indexs=lengths;
       }
-      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().fadeOut();
       $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
    })
    $('.lunbo_right').on('click',function(){
@@ -309,23 +309,23 @@ $(function(){
       if(indexs>=lengths){
         indexs =0
       }
-      $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+      $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().fadeOut();
       $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
    })
    $('.lunbo').on('mouseleave',function(){
-    $('.lunbo_left,.lunbo_right').hide()
+    $('.lunbo_left,.lunbo_right').fadeOut()
       timer = setInterval(function(){
         indexs++;
         if(indexs>=lengths){
           indexs =0
         }
-        $('.lunbo_img ul li').eq(indexs).show().siblings().hide();
+        $('.lunbo_img ul li').eq(indexs).fadeIn().siblings().fadeOut();
         $('.lunbo_dian dt').eq(indexs).addClass('yl').siblings().removeClass('yl')
      },1000)
       return false;
    })
    $('.lunbo').on('mouseenter',function(){
-       $('.lunbo_left,.lunbo_right').show()
+       $('.lunbo_left,.lunbo_right').fadeIn()
       clearInterval(timer)
       return false;
    })
