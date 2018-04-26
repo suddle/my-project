@@ -7,6 +7,29 @@ body{
     width: 100%;
     line-height: 30px;
 }
+.location_place{
+    width:40px;
+    text-align: center;
+    height:30px;
+    position:relative;
+}
+.all_city{
+    display:none;
+    position:absolute;
+    top:30px;
+    left:0px;
+    z-index: 10;
+    background:#fff;
+}
+.all_city a{
+    width:20px;
+    white-space: nowrap;
+    padding:3px;
+}
+.location_place:hover{
+    background:#fff;
+
+}
 .location{
     margin-left: 200px;
 }
@@ -121,6 +144,7 @@ body{
     background:#fff;
     margin-top: 2px;
     padding:15px 0px;
+    position:relative;
 }
 .midum_ul{
     width:190px;
@@ -161,7 +185,7 @@ body{
     width:300px;
     position:absolute;
     bottom:10px;
-    z-index: 10;
+    z-index: 9;
     left:40%;
 }
 .lunbo_dian dt{
@@ -202,4 +226,19 @@ body{
 }
 .lunbo_right{
     right:5px;
+}
+.goods_ul{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.goods_ul{
+        width: 590px;
+    height: 490px;
+    background-color: #fff;
+    position: absolute;
+    display: none;
+    z-index: 10;
+    left: 200px;    
+    padding: 11px;
 }

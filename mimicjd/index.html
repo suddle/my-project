@@ -26,7 +26,12 @@
                     <li class="fr">我的订单</li>
                     <li class="nav_line"></li>
                     <li class="fl location">
-                        <span><i></i>北京</span>
+                        <div class="location_place"><i></i>北京
+                            <div class="all_city">
+                              <a href="" v-for="pl in place">{{pl.place}}</a>
+                            </div>
+                        </div>
+                        
                     </li>
                     <p class="fr inline">你好,请登陆<em class="login">免费注册</em></p>    
                 </ul>
@@ -77,10 +82,13 @@
         <div class="midum_nav">
             <div class="wrap_1200">
                 <div class="midum_nav_one">
-                    <ul class="midum_ul" v-for="todo in todos">
-                        <li>
+                    <ul class="midum_ul">
+                        <li  v-for="todo in todos">
                             <a href=""  v-for="td in todo.text"><em>{{td.name}}</em></a>
                         </li>
+                    </ul>
+                    <ul class="goods_ul">
+                      <li v-for="gd in goods"><a href="" v-for='kd in gd.kind'>{{kd.kid_name}}</a></li>
                     </ul>
                 </div>
                 <div class="midum_nav_two">
@@ -151,6 +159,27 @@
                   { text: [{name:'图书'},{name:'音像'},{name:'电子书'}]},
                   { text: [{name:'机票'},{name:'酒店'},{name:'旅游'},{name:'生活'}]},
                   { text: [{name:'理财'},{name:'众筹'},{name:'白条'},{name:'保险'}]}
+                ],
+                goods: [
+                  { kind: [{kid_name:'家用电器'}] },
+                  { kind: [{kid_name:'数码'},{kid_name:'手机'},{kid_name:'运营商'}]},
+                  { kind: [{kid_name:'电脑'},{kid_name:'办公'}]},
+                  { kind: [{kid_name:'家具'},{kid_name:'家电'},{kid_name:'家装'},{kid_name:'厨具'}]},
+                  { kind: [{kid_name:'男装'},{kid_name:'女皇'},{kid_name:'童装'},{kid_name:'内衣'}]},
+                  { kind: [{kid_name:'美妆个护'},{kid_name:'宠物'}]},
+                  { kind: [{kid_name:'女鞋'},{kid_name:'箱包'},{kid_name:'中标'},{kid_name:'珠宝'}]},
+                  { kind: [{kid_name:'男鞋'},{kid_name:'运动'},{kid_name:'户外'}]},
+                  { kind: [{kid_name:'房产'},{kid_name:'汽车'},{kid_name:'汽车用品'}]},
+                  { kind: [{kid_name:'母婴'},{kid_name:'玩具乐器'}]},
+                  { kind: [{kid_name:'食品'},{kid_name:'酒类'},{kid_name:'生鲜'},{kid_name:'特产'}]},
+                  { kind: [{kid_name:'艺术'},{kid_name:'礼品鲜花'},{kid_name:'农资'}]},
+                  { kind: [{kid_name:'医药'},{kid_name:'情趣用品'}]},
+                  { kind: [{kid_name:'图书'},{kid_name:'音像'},{kid_name:'电子书'}]},
+                  { kind: [{kid_name:'机票'},{kid_name:'酒店'},{kid_name:'旅游'},{kid_name:'生活'}]},
+                  { kind: [{kid_name:'理财'},{kid_name:'众筹'},{kid_name:'白条'},{kid_name:'保险'}]}
+                ],
+                place:[
+                  {place:'北京'},{place:'石家庄'},{place:'太原 '}
                 ]
           }
         })
@@ -204,6 +233,19 @@
                $('.lunbo_left,.lunbo_right').fadeIn()
               clearInterval(timer)
               return false;
+           })
+           $('.location_place').on('mouseenter',function(){
+              $('.all_city').show()
+           })
+           $('.all_city,.location_place').on('mouseleave',function(){
+              $('.all_city').hide()
+           })
+           $('.midum_ul li').on('mouseenter',function(){
+              $('.goods_ul').show()
+              $('.goods_ul li').eq($(this).index()).show().siblings().hide()
+           })
+           $('.midum_ul li').on('mouseleave',function(){
+              $('.goods_ul').hide()
            })
     })
 
