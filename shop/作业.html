@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<style type="text/css">
+    .wrap{
+        margin:0px;
+        padding: 0px;
+        border:1px solid #333;
+        padding:10px;
+    }
+    .form{
+        width: 500px;
+        margin:10px auto;
+    }
+    .btn{
+        width:300px;
+        height: 30px;   
+        margin:0 auto;
+        display:block;
+    }
+    label{
+        display:inline-block;
+        height:50px;
+    }
+    label input{
+        margin-left: 10px;
+    }
+    label select{
+        margin-left: 12px;
+    }
+</style>
+<body>
+    <form action="post" class="form">
+        <div class="wrap">
+            <h3>表单验证</h3>
+            <label for="">&nbsp;用户名:<input type="text" minlength="10"/></label><br />
+            <label for="">&nbsp;密&nbsp;码:<input type="password" minlength="6" maxlength="16" /></label><br />
+            <label for="">确认密码:<input type="password" minlength="6" maxlength="16" /></label><br />
+            <label for="">&nbsp;性&nbsp;别:<input type="radio" name="sex" value="男">男<input type="radio" name="sex" value="男">女</label><br />
+            <label for="">身份证号:<input type="number" maxlength="18" /></label><br />
+            <label for="">手机号码:<input type="tel" maxlength="11" /></label><br />
+            <label for="">&nbsp;邮&nbsp;箱:<input type="tel" /></label><br />
+            <label for="">&nbsp;城&nbsp;市:<select name="" ><option value="">北京</option></select></label><br />
+            <label for=""><input type="checkbox" />自动登陆</label><br />
+            <input type="button" value="提交" class="btn" />
+        </div>
+    </form>
+</body>
+</html>
