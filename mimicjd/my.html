@@ -183,7 +183,18 @@
             return x**2
         }
         var data1 = list.map(deils)
-        console.log(data1)
+        var list1 = [76,23,65,98,43,45]
+        for (var i=0;i<list1.length-1;i++){
+            for (var j=i;j<list1.length;j++){
+                if (list1[i]>list1[j]){
+                    var min = list1[i]
+                    var max = list1[j]
+                    list1[i] = max
+                    list1[j] = min
+                }
+            }
+        }
+        console.log(list1)
     })
 </script>
 </body>
