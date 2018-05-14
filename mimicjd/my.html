@@ -93,6 +93,98 @@
               假如二级菜单都选中，那么所有一级菜单，全选都选中，确定按钮变橙色 。
       -->
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        function bg_cheange(sum){
+            if (sum==1){
+                $('.btn_search span').addClass('grey')
+            }else{
+                $('.btn_search span').removeClass('grey')
+            }
+        }
+        $('.lage_input').on('click',function(){
+            if ($(this).is(':checked')){
+                $('.middle_input').attr('checked',true)
+                $('.lage_input').attr('checked',true)
+                bg_cheange(0)
+            }else{
+                $('.middle_input').attr('checked',false)
+                $('.lage_input').attr('checked',false)
+                bg_cheange(1)
+            }
+            if ($('.middle_input').is(':checked')){
+                $('.size_input').attr('checked',true)
+            }else{
+               $('.size_input').attr('checked',false) 
+            }
+        })
+        $('.middle_input').on('click',function(){
+            let allthis = $('.middle_input').length;
+            let itemthis = $('.middle_input:checked').length;
+            if ($(this).is(':checked')){
+                $(this).closest('li').find('.size_input').attr('checked',true)
+            }else{
+                $(this).closest('li').find('.size_input').attr('checked',false) 
+            }
 
+            if (allthis==itemthis){
+                $('.lage_input').attr('checked',true)
+                bg_cheange(0)
+            }else{
+                $('.lage_input').attr('checked',false)
+                bg_cheange(1)
+            }
+        })
+        $('.size_input').on('click',function(){
+            let alllength = $(this).closest('li').find('.size_input').length;
+            let itemlength = $(this).closest('li').find('.size_input:checked').length;
+            let itemlengtha = ''
+            let alllengtha = $('.middle_input').length;
+            if (alllength == itemlength){
+                 $(this).closest('li').find('.middle_input').attr('checked',true)
+                 itemlengtha = $('.middle_input:checked').length;
+            }else{
+                $(this).closest('li').find('.middle_input').attr('checked',false) 
+            }
+            if (itemlengtha==alllengtha){
+                $('.lage_input').attr('checked',true)
+                bg_cheange(0)
+            }else{
+                $('.lage_input').attr('checked',false)
+                bg_cheange(1)
+            }
+        })
+
+        function cook(){
+            var data = [1,2,3,4,5]
+            var dfd = new Promise(function(resolve, reject){        //做一些异步操作
+                setTimeout(function(){
+                    reject(data);
+                }, 1000);
+            });
+            return dfd;
+        }
+        function eat(data){
+            console.log('列表是' + data);
+            var dfd1 = new Promise(function(resolve, reject){        //做一些异步操作
+                setTimeout(function(){
+                    resolve(data);
+                }, 2000);
+            });
+            return dfd1;
+        }
+        cook()
+        .then(eat,function(data){
+            console.log(data,'sd')
+            return eat(data);
+        })
+        var list = [1,2,3,5]
+        function deils(x){
+            return x**2
+        }
+        var data1 = list.map(deils)
+        console.log(data1)
+    })
+</script>
 </body>
 </html>
