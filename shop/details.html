@@ -5,6 +5,11 @@
     <link rel="stylesheet" type="text/css" href="css/basic.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
+<style type="text/css">
+  .detail_model_foot{
+    color:#333;
+  }
+</style>
 <body>
     <div class="wrap">
         <div class="shop_head_nav">
@@ -89,7 +94,7 @@
                               <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                           </div>
                           <p class="detail_foot_txt">
-                              <span>￥11</span>
+                              <span>￥1</span>
                               <strong class="fr">￥12</strong>
                           </p>
                           <p class="detail_model_price">
@@ -111,7 +116,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥2</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -133,7 +138,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥3</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -155,7 +160,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥4</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -177,7 +182,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥5</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -199,7 +204,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥6</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -221,7 +226,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥7</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -243,7 +248,7 @@
                                   <img src="http://static.chuanshangjia.com/mallpic/productpic/673a72b24ecbec7a5c8a3931b07c98b3.jpg" alt="" />
                               </div>
                               <p class="detail_foot_txt">
-                                  <span>￥11</span>
+                                  <span>￥8</span>
                                   <strong class="fr">￥12</strong>
                               </p>
                               <p class="detail_model_price">
@@ -329,6 +334,20 @@ $(function(){
       clearInterval(timer)
       return false;
    })
+   $('.search_input').keydown(function(e){
+    if(e.keyCode==13){
+       var val = $(this).val();
+       var names= '';
+       for (val in $('.detail_model_price').text()){
+          var htmls = $('.detail_model_price').closest('.detail_model')
+          $('.detail_shop_ct').html('')
+          console.log($('.detail_shop_ct').html())
+           $('.detail_shop_ct').html(htmls)
+           console.log($('.detail_shop_ct').html())
+          return false
+       }
+     } 
+    });
 
 })
 </script>
