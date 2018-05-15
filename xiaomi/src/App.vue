@@ -1,41 +1,31 @@
 <template>
   <div id="app">
     <div class="cy_top">
-      <el-menu
-        :default-active="activeIndex2"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
-            <el-menu-item index="2-4-2">选项2</el-menu-item>
-            <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-      </el-menu>
+      <div class="cy_top_logo">
+        <span></span>
+      </div>
+      <ul class="cy_top_ul">
+         <li>
+            <router-link to="/one">用户管理</router-link>
+         </li>
+         <li>
+            <router-link to="/two">配置管理</router-link>
+         </li>
+         <li>
+            <router-link to="/">角色管理</router-link>
+         </li>
+       </ul>
     </div>
     <div class="cy_left">
        <ul>
          <li>
-            <router-link to="/one">one</router-link>
+            <router-link to="/one">用户管理</router-link>
          </li>
          <li>
-            <router-link to="/two">two</router-link>
+            <router-link to="/two">配置管理</router-link>
          </li>
          <li>
-            <router-link to="/">index</router-link>
+            <router-link to="/">角色管理</router-link>
          </li>
        </ul>
     </div>
@@ -45,19 +35,17 @@
 
 <script>
   export default {
-    name: 'App',
     data() {
       return {
-        activeIndex: '1',
-        activeIndex2: '1'
-      };
+        activeName2: 'first',
+      }
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
-  }
+  };
 </script>
 
 <style>
@@ -66,13 +54,15 @@ body,html{
   height:100%;
   width:100%;
 }
+.el-tabs__content{
+  display:none;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-/*  margin-top: 60px;*/
   height:100%;
 }
 .cy_left{
@@ -84,14 +74,42 @@ body,html{
 }
 .cy_top{
   width:100%;
-  height:10%;
   border:1px solid #ddd;
-  background:#409eff;
+  height:70px;
+  line-height: 70px;
+  background:#333;
 }
-.cy_top img{
-  display:inline-block;
+.cy_top_logo{
+    width:50px;
+    height:50px;
+    background:purple;
+    border-radius: 50%;
+    float:left;
+     margin-right: 144px;
+     margin-left: 100px;
+     margin-top: 10px;
+}
+.cy_top_ul{
+float:left;
+width:79%;
+}
+.imgs{
+  float:left;
   width:100px;
   height:100px;
+}
+.cy_top ul li{
+  float:left;
+  width:30%;
+}
+.cy_top ul li a{
+  display:inline-block;
+  color:#fff;
+  width:100%;
+  height:100%;
+}
+.cy_top ul li:hover{
+  background:#999;
 }
 .cy_left ul li{
   height:60px;
