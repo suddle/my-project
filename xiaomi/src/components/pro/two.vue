@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
+    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini" v-show="is_true">
       <el-form-item label="活动名称">
         <el-input v-model="sizeForm.name"></el-input>
       </el-form-item>
@@ -37,6 +37,32 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
+    <el-table
+      :data="tableData"
+      style="width: 100%">
+      <el-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址">
+      </el-table-column>
+      <el-table-column
+        prop="qualitative"
+        label="性质">
+      </el-table-column>
+      <el-table-column
+        prop="resource"
+        label="资源">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -44,6 +70,7 @@
   export default {
     data() {
       return {
+        is_true:false,
         sizeForm: {
           name: '',
           region: '',
@@ -53,13 +80,31 @@
           type: [],
           resource: '',
           desc: ''
-        }
+        },
+        tableData: [{
+            date: '',
+            name: '',
+            address: '',
+            qualitative:'',
+            resource:'',
+          }]
       };
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
+        this.is_true = false
+        this.tableData[0].date = this.sizeForm.date1+this.sizeForm.date2
+        this.tableData[0].name = this.sizeForm.name
+        this.tableData[0].address = this.sizeForm.region
+        this.tableData[0].qualitative = this.sizeForm.type
+        this.tableData[0].resource = this.sizeForm.resource
       }
+    },
+    mounted(){
+         this.is_true = true
+    },
+    updated(){
+      
     }
   };
 </script>

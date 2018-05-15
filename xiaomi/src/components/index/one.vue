@@ -52,7 +52,7 @@
       </template>
     </el-table-column>
   </el-table>
-  <div class="cover" v-for="data1 in datas">
+  <div class="cover" v-for="data1 in datas" v-show="is_true">
     <input type="text" name="date" v-model="data1.date"/><br /><br />
     <input type="text" name="name" v-model="data1.name"/><br /><br />
     <input type="text" name="province" v-model="data1.province"/><br /><br />
@@ -68,6 +68,8 @@
   export default {
     data() {
       return {
+        is_true:false,
+        indexs:1,
         datas:[{
           date: '2016-05-03',
           name: '王小虎',
@@ -133,15 +135,17 @@
         rows.splice(index, 1);
       },
       handleEdit(index,rows){
-        rows.date = '2019-06-09';
-        rows.name = '张浚宇';
-        rows.province = '内蒙古';
-        rows.city = '呼和浩特';
-        rows.address = '锦绣园';
-        rows.zip = '0986';
+        this.is_true = true
+        this.indexs = index
       },
       sure_input(){
-        this.tableData4[1]=this.datas[0]
+        this.tableData4[this.indexs].name =this.datas[0].name
+        this.tableData4[this.indexs].date =this.datas[0].date
+        this.tableData4[this.indexs].province =this.datas[0].province
+        this.tableData4[this.indexs].city =this.datas[0].city
+        this.tableData4[this.indexs].address =this.datas[0].address
+        this.tableData4[this.indexs].zip =this.datas[0].zip
+        this.is_true = false
       }
     }
   }
@@ -154,11 +158,19 @@
 }
 .cover{
   position: fixed;
-  top:50%;
+  top:30%;
   left:50%;
-  width:200px;
+  width:300px;
   min-height:200px;
   border:1px solid #333;
   padding:10px;
+  background:#fff;
+  border-radius: 10px;
+}
+.cover input{
+  height:30px;
+  border-radius: 10px;
+  border:1px solid #ddd;
+  outline: none;
 }
 </style>

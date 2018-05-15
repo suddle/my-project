@@ -6,7 +6,10 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import echarts from 'echarts'
+import layer from 'vue-layer'
 
+
+Vue.prototype.$layer = layer(Vue);
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts 
 Vue.use(ElementUI)

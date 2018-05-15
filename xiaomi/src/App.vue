@@ -2,7 +2,7 @@
   <div id="app">
     <div class="cy_top">
       <div class="cy_top_logo">
-        <span></span>
+        <span><img src="http://img2.youxiake.com/avatar1350017_RGw7laYUYY74.jpg" alt="" /></span>
       </div>
       <ul class="cy_top_ul">
          <li>
@@ -88,6 +88,10 @@ body,html{
      margin-right: 144px;
      margin-left: 100px;
      margin-top: 10px;
+}
+.cy_top_logo img{
+    width:50px;
+    height:50px;
 }
 .cy_top_ul{
 float:left;
