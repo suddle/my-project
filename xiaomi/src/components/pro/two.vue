@@ -63,6 +63,10 @@
         label="资源">
       </el-table-column>
     </el-table>
+    <div> 
+　　　I am bb component:{{msg}}
+　　　<input type="button" @click="send" value="SendTo-cc">
+　　</div>
   </div>
 </template>
 
@@ -71,6 +75,7 @@
     data() {
       return {
         is_true:false,
+        msg:'dgdfgdfg',
         sizeForm: {
           name: '',
           region: '',
@@ -91,6 +96,9 @@
       };
     },
     methods: {
+      send(){
+        this.$emit('b-send',this.msg)
+　　　},
       onSubmit() {
         this.is_true = false
         this.tableData[0].date = this.sizeForm.date1+this.sizeForm.date2

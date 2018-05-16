@@ -6,6 +6,9 @@
     <div class="charts">
       <div id="Chart1" style="width:1200px;height:400px;margin-left:500px;"></div>
     </div>
+    <div>
+　　　　　　I am cc component:{{msg}}/receive data:{{msg2}},{{msg3}}
+　　　　　　</div>
   </div>
 </template>
 
@@ -13,11 +16,15 @@
     export default {
       data () {
         return {
-          msg: [1,2,3]
+          msg: [1,2,3],
+          msg2: '',
+          msg3: ''
         }
       },
       mounted(){
         this.drawLine();
+        this.$on('a-send',(data)=>{this.msg2=data});
+        this.$on('b-send',(data)=>{this.msg3=data});
       },
       methods: {
         drawLine(){

@@ -61,6 +61,10 @@
     <input type="text" name="zip" v-model="data1.zip"/><br /><br />
     <button @click="sure_input">确定</button>
   </div>
+    <div> 
+　　　I am aa component:{{msg}}
+　　　<input type="button" @click="send" value="SendTo-cc">
+　　</div>
   </div>
 </template>
 
@@ -70,6 +74,7 @@
       return {
         is_true:false,
         indexs:1,
+        msg:'sfdsdf',
         datas:[{
           date: '2016-05-03',
           name: '王小虎',
@@ -131,6 +136,9 @@
       }
     },
     methods: {
+      send(){
+          this.$emit('a-send',this.msg)
+　　　},
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
