@@ -36,6 +36,9 @@
         background:grey!important;
         pointer-events: none;
     }
+    .ps{
+        margin-left:30px;
+    }
 </style>
 <body>
     <div class="out">
@@ -44,40 +47,67 @@
         </div>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
-        <li>一级<input type="checkbox" class="middle_input">
+       <!--  <li>一级<input type="checkbox" class="middle_input">
             <dl>
                 <dd>二级<input type="checkbox" class="size_input"></dd>
                 <dd>二级<input type="checkbox" class="size_input"></dd>
                 <dd>二级<input type="checkbox" class="size_input"></dd>
+            </dl>
+        </li> -->
+       <!--  <li>一级<input type="checkbox" class="middle_input">
+            <dl>
+                <dd>二级<input type="checkbox" class="size_input"></dd>
                 <dd>二级<input type="checkbox" class="size_input"></dd>
                 <dd>二级<input type="checkbox" class="size_input"></dd>
             </dl>
-        </li>
+        </li> -->
+       <!--  <li>一级<input type="checkbox" class="middle_input">
+            <dl>
+                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input"></dd>
+            </dl>
+        </li> -->
     </div>
     <div>
         全选<input type="checkbox" class="lage_input">
@@ -106,10 +136,12 @@
             if ($(this).is(':checked')){
                 $('.middle_input').attr('checked',true)
                 $('.lage_input').attr('checked',true)
+                $('.th_input').attr('checked',true)
                 bg_cheange(0)
             }else{
                 $('.middle_input').attr('checked',false)
                 $('.lage_input').attr('checked',false)
+                $('.th_input').attr('checked',false)
                 bg_cheange(1)
             }
             if ($('.middle_input').is(':checked')){
@@ -123,8 +155,10 @@
             let itemthis = $('.middle_input:checked').length;
             if ($(this).is(':checked')){
                 $(this).closest('li').find('.size_input').attr('checked',true)
+                $(this).closest('li').find('.th_input').attr('checked',true)
             }else{
                 $(this).closest('li').find('.size_input').attr('checked',false) 
+                $(this).closest('li').find('.th_input').attr('checked',false)
             }
 
             if (allthis==itemthis){
@@ -146,6 +180,7 @@
             }else{
                 $(this).closest('li').find('.middle_input').attr('checked',false) 
             }
+
             if (itemlengtha==alllengtha){
                 $('.lage_input').attr('checked',true)
                 bg_cheange(0)
@@ -153,48 +188,43 @@
                 $('.lage_input').attr('checked',false)
                 bg_cheange(1)
             }
-        })
 
-        function cook(){
-            var data = [1,2,3,4,5]
-            var dfd = new Promise(function(resolve, reject){        //做一些异步操作
-                setTimeout(function(){
-                    reject(data);
-                }, 1000);
-            });
-            return dfd;
-        }
-        function eat(data){
-            console.log('列表是' + data);
-            var dfd1 = new Promise(function(resolve, reject){        //做一些异步操作
-                setTimeout(function(){
-                    resolve(data);
-                }, 2000);
-            });
-            return dfd1;
-        }
-        cook()
-        .then(eat,function(data){
-            console.log(data,'sd')
-            return eat(data);
-        })
-        var list = [1,2,3,5]
-        function deils(x){
-            return x**2
-        }
-        var data1 = list.map(deils)
-        var list1 = [76,23,65,98,43,45]
-        for (var i=0;i<list1.length-1;i++){
-            for (var j=i;j<list1.length;j++){
-                if (list1[i]>list1[j]){
-                    var min = list1[i]
-                    var max = list1[j]
-                    list1[i] = max
-                    list1[j] = min
-                }
+            if ($(this).is(':checked')){
+                $(this).closest('dd').find('.th_input').attr('checked',true)
+            }else{
+                $(this).closest('dd').find('.th_input').attr('checked',false) 
             }
-        }
-        console.log(list1)
+        })
+        $('.th_input').on('click',function(){
+            let allth_length = $(this).closest('dd').find('.th_input').length;
+            let itemth_length = $(this).closest('dd').find('.th_input:checked').length;
+            let itemlengtha = ''
+            let alllengtha = $(this).closest('dl').find('.size_input').length;
+            let itemlengthb = ''
+            let alllengthb = $(this).closest('.out').find('.middle_input').length;
+
+            if (allth_length == itemth_length){
+                $(this).closest('dd').find('.size_input').attr('checked',true)
+                itemlengtha = $(this).closest('dl').find('.size_input:checked').length;
+            }else{
+                $(this).closest('dd').find('.size_input').attr('checked',false)
+            }
+
+            if (itemlengtha==alllengtha){
+                $(this).closest('li').find('.middle_input').attr('checked',true)
+                itemlengthb = $(this).closest('.out').find('.middle_input:checked').length;
+            }else{
+                $(this).closest('li').find('.middle_input').attr('checked',false)
+            }
+
+            if (itemlengthb==alllengthb){
+                $('.lage_input').attr('checked',true)
+                bg_cheange(0)
+            }else{
+                $('.lage_input').attr('checked',false)
+                bg_cheange(1)
+            }
+        })
     })
 </script>
 </body>
