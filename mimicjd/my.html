@@ -44,38 +44,44 @@
         </div>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
         <li>一级<input type="checkbox" class="middle_input">
             <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-            </dl>
-        </li>
-        <li>一级<input type="checkbox" class="middle_input">
-            <dl>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
-                <dd>二级<input type="checkbox" class="size_input"></dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
+                <dd>二级<input type="checkbox" class="size_input">
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                    <p class="ps">三级<input type="checkbox" class="th_input"></p>
+                </dd>
             </dl>
         </li>
     </div>
@@ -89,7 +95,11 @@
            2，点击一级按钮其下面的二级子菜单都选中，确定按钮变灰。 
               假如一级菜单都选中，那么全选也要选中,确定按钮变橙色 。
               点击任意一级菜单的二级子菜单让其不选中，那么全选就不选中，这个一级菜单也不选中，确定按钮变灰。
-           3，点击任意一级下的二级菜单，假如这些二级菜单都选中，那么一级要选中，确定按钮变灰 。
+           3，点击任意一级下的二级菜单，假如这些二级菜单都选中，那么父级一级要选中，确定按钮变灰 。
+              假如二级菜单都选中，那么所有一级菜单，全选都选中，确定按钮变橙色 。
+           4，点击任意一级下的三级菜单，假如这些三级菜单都选中，那么父级二级要选中，确定按钮变灰 。
+              假如三级菜单都选中，那么所有二级菜单，全选都选中，确定按钮变橙色 。
+              假如这些父级二级菜单都选中，那么父级的父级一级要选中，确定按钮变灰 。
               假如二级菜单都选中，那么所有一级菜单，全选都选中，确定按钮变橙色 。
       -->
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
