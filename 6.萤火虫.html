@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			/*背景图隐藏*/
+			#bg{
+				display: none;
+			}
+			
+			#light{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+			}
+		</style>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				// 获取窗口的大小
+				var w_width = window.innerWidth;
+				var w_height = window.innerHeight;
+				// 设置背景图的大小
+				$("#bg").width(w_width);
+				$("#bg").height(w_height);
+				
+				
+				$("#bg").fadeIn(3000, function(){
+					// 萤火虫飞动起来
+					setInterval(function(){
+						// 随机位移
+						var left = Math.ceil(Math.random() * parseInt(w_width));
+						var top = Math.ceil(Math.random() * parseInt(w_height));
+						
+						$("#light").animate({left:left + "px", top:top + 'px'}, 3000);
+					}, 3000)
+				});
+				
+			});
+		</script>
+	</head>
+	<body>
+		
+		<img id="bg" src="图片/bg.jpg"/>
+		<img id="light" src="图片/萤火虫.jpg" />
+	
+	</body>
+</html>
