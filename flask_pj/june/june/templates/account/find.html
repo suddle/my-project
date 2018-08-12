@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% from "macro/form.html" import vertical_field %}
+
+{% block subtitle %}{{_('Find Password')}}{% endblock %}
+
+{% block main %}
+<form class="form-single" method="post" action="">
+  <h2>{{_('Find Password')}}</h2>
+  {{ form.csrf_token }}
+  {{ vertical_field(form.account, 'input-block-level') }}
+  <div class="form-submit">
+    <button class="btn btn-success">{{_('Send')}}</button>
+  </div>
+</form>
+{% endblock %}

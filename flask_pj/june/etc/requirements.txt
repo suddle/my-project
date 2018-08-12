@@ -1,0 +1,27 @@
+# This requirements is for development
+
+Flask
+misaka
+gevent==0.13.8
+
+# database
+Flask-SQLAlchemy
+
+# cache support
+Flask-Cache
+#python-memcached
+
+# i18n and l10n
+Flask-Babel
+
+# form support
+Flask-WTF
+WTForms
+
+# mail support
+Flask-Mail
+
+# command line tools
+Flask-Script
+
+gunicorn

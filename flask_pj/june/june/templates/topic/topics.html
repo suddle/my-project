@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block subtitle %}{{_('Topics')}}{% endblock %}
+
+{% from "macro/ui.html" import nav %}
+
+{% block nav %}
+{{ nav('topic') }}
+{% endblock %}
+
+
+{% block content %}
+{% from "macro/ui.html" import topic_list, pagination %}
+<div class="module">
+  <div class="module-header clearfix">
+    <ul class="pull-right nav nav-pills">
+      {% if endpoint == 'topic.topics'%}<li class="active">{% else %}<li>{% endif %}
+      <a href="{{url_for('topic.topics')}}">{{_('Update')}}</a>
+      </li>
+      {% if endpoint == 'topic.latest'%}<li class="active">{% else %}<li>{% endif %}
+      <a href="{{url_for('topic.latest')}}">{{_('Latest')}}</a>
+      </li>
+      {% if endpoint == 'topic.desert'%}<li class="active">{% else %}<li>{% endif %}
+      <a href="{{url_for('topic.desert')}}">{{_('Desert')}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="module-body">
+    {{ topic_list(paginator.items) }}
+  </div>
+  {% if paginator.pages > 1 %}
+  <div class="module-footer inner">
+    {{ pagination(paginator, url_for(endpoint)) }}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

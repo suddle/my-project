@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}{{config.SITE_TITLE}}{% endblock %}
+{% from "macro/ui.html" import topic_list, node_list %}
+
+{% block content %}
+{% if blogs %}
+<div class="module">
+  <div class="module-header inner">
+    <strong>{{blog}}</strong>
+  </div>
+  <div class="module-body">
+    {{ topic_list(blogs, False, False) }}
+  </div>
+</div>
+{% endif %}
+<div class="module">
+  <div class="module-header inner">
+    <strong>{{_('Recent Topics')}}</strong>
+  </div>
+  <div class="module-body">
+    {{ topic_list(topics) }}
+  </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="module">
+  <div class="module-header inner">
+    <strong>{{_('Recent Nodes')}}</strong>
+  </div>
+  <div class="module-body">
+    {{ node_list(nodes, False) }}
+  </div>
+</div>
+{% endblock %}
